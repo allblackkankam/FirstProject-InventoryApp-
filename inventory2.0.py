@@ -14,13 +14,19 @@ print"""----------------------------------------
 
 
 print """	Inventory Option
-	----------------
+	-------------------
 	1. Add item
 	2. View Inventory
 	3. To Edit Quantity
 	4. Remove item
 	0. Exit Program
-	-----------------"""
+	-------------------
+	NOTE: Please Use Numbers For Program 
+	* Options 
+	* Quantity and When Asked
+	Failure Would Crash Program !!!
+
+	--------------------------------------"""
 
 #input for inventory
 option = int(raw_input("Enter Option: "))
@@ -31,13 +37,16 @@ while option != 0:
 	if option == 1 :
 		item =raw_input("Enter Item: ")
 		if item in inventor:
-			print "Item already Exist"
-			print "Any number to add 0R 0 to Pass"
+			print """-------------------------------
+Item Already Exist
+Any Number To Add OR 0 To Pass"""
 			qnty = int(raw_input("Add Quantity: "))
 			inventor[item] += qnty
+			print "(%s"% qnty, "of%s" %item, "has been added )"
 		else:
 			qnty = int(raw_input("Enter Quantity: "))
 			inventor[item]= qnty
+			print "(%d"% qnty, item, "has been added to Inventory )"
 
 
 #option to view item to the dictionary
@@ -47,16 +56,32 @@ while option != 0:
 		
 #option to edit quantity to the items in dictionary
 	elif option == 3 :
-		print "1. Add 	\n0. Reduce"
+		print "1. Add 	\n0. Reduce 	\n----------"
 		choice = int(raw_input("Choice: "))
 		if choice == 1:
 			item = raw_input("Enter Item: ")
-			qnty = int(raw_input("Enter Number to Add: "))
-			inventor[item] += qnty
+			if item not in inventor:
+				print"""-----------------------
+Item Not in Inventory
+Use Option 1 To Add"""
+				pass
+			else: 
+				qnty = int(raw_input("Enter Number to Add: "))
+				inventor[item] += qnty
+				print "(%s" % qnty, "of%s" %item, "has been added )"
+
 		elif choice == 0:
 			item = raw_input("Enter Item: ")
-			qnty = int(raw_input("Enter Number to Reduce: "))
-			inventor[item]-= qnty
+			if item not in inventor:
+				print"""-----------------------
+Item Not in Inventory
+Use Option 1 To Add"""
+				pass
+			else: 
+				qnty = int(raw_input("Enter Number to Reduce: "))
+				inventor[item]-= qnty
+				print "(%s" % item, "has been reduced by%s" % qnty, ")"
+		
 
 #option to Add item to the empty dictionary
 	elif option == 4:
@@ -65,14 +90,20 @@ while option != 0:
 		print "1. Remove  \n0. Cancel "
 		choice = int(raw_input("Choice: "))
 		if choice == 1:
-			del(inventor[item])
+			del inventor[item]
+			print "(%s" % item,"has been removed )"
 		else:
 			pass
-			
+			print "(%s" % item,"has not been removed )"
 #option to exit program
-	elif option == 0 :
-		print "Inventory Program Has Ended !!! "
-
+	elif option != 0 :
+		print """	Invalid Option !!! 
+	\n 	1. Add item
+	2. View Inventory
+	3. To Edit Quantity
+	4. Remove item
+	0. Exit Program"""
+		
 	option = int(raw_input("\nEnter Option: "))
 
 	
@@ -80,12 +111,13 @@ else:
 	print "\n\nInventory Program Has Ended !!! "
 	print "________________________________"
 
+
 #file writing 
 filename = "invent.txt"
-file = open (filename, "wb")
+file = open (filename, "w")
 pickle.dump(inventor,file)
 
-file = open(filename,"rb")
+file = open(filename,"r")
 invet = pickle.load(file)
 
 

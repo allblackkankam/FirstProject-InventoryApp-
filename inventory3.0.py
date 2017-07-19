@@ -44,8 +44,11 @@ while option != 0:
 
 #option to view item to the inventory
 	elif option ==2 :
-		for item in inventory:
-			print item,":",inventory[item]
+		if inventory == {}:
+			print "Inventory is empty"
+		else:
+	 		for item in inventory:
+				print item,":",inventory[item]
 
 #option to edit quantity to the items in inventory
 	elif option == 3 :

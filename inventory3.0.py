@@ -40,7 +40,7 @@ while option != 0:
 			inventory[item] = qnty
 		print "________________________________"
 		print "%r has been added to stock" % item
-		print ("Quantity of %r is now %d." % (item, inventory[item]))
+		print "Quantity of %r is now %d." % (item, inventory[item])
 
 #option to view item to the inventory
 	elif option ==2 :
